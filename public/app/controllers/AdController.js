@@ -3,7 +3,7 @@
 
 
     angular.module('adtracker')
-        .controller('AdController', ['$log', AdController]);
+        .controller('AdController', ['$log', 'dataService', AdController]);
 
 
     /**
@@ -12,9 +12,28 @@
      *
      * @param $log
      * @constructor
+     * @param dataService
      */
-    function AdController($log){
+    function AdController($log, dataService){
+
         $log.debug("Ad Landing Controller Initialized");
+
+        var self = this;
+
+        dataService.getAllAds()
+            .then(getDataSuccess)
+            .catch(getDataError);
+
+
+        function getDataSuccess(data){
+            $log.debug("Successfully Fetched the ad(s).");
+            self.ads = data;
+        }
+
+        function getDataError(reason){
+            $log.debug(reason);
+        }
+
     }
 
 }());

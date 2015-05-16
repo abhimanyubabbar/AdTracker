@@ -15,7 +15,7 @@ app.get("/", function(req, resp){
     resp.render('index');
 });
 
-app.get("/ads", function(req, resp){
+app.get("/api/ads", function(req, resp){
    resp.json(getAdData());
 });
 
