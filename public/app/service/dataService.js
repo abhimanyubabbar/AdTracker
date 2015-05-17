@@ -50,11 +50,12 @@
         }
 
 
-        function editAd(id){
+        function editAd( id, data ){
 
             return $http({
                 method: 'PUT',
-                url: 'api/ads/'+id
+                url: 'api/ads/'+id,
+                data: data
             })
                 .then(httpSuccess)
                 .catch(httpError);

@@ -94,7 +94,7 @@ router.route("/:id")
         Ad.findById(req.params.id, function(err, data){
 
             if(err){
-                resp.status(404)
+                return resp.status(404)
                     .send("Unable to Locate Resource to Update");
             }
 

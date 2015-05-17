@@ -1,0 +1,86 @@
+<div>
+    <form ng-submit="editAdController.updateAd()" name="editAdForm" novalidate>
+
+        <div class="modal-header">
+            <button type="button" class="close" ng-click="editAdController.close()">&times;</button>
+            <h4 class="modal-title">Ad New Ad</h4>
+        </div>
+
+        <div class="modal-body">
+
+            <div class="form-group">
+                <label class="control-label" for="adName"> Ad Name</label>
+                <div>
+                    <input class="form-control" type="text" id="adName" ng-model="editAdController.selfAdObj.name" readonly/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label" for="campaignName"> Campaign Name</label>
+                <div>
+                    <input class="form-control" type="text" id="campaignName" ng-model="editAdController.selfAdObj.campaignName" readonly/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label" for="pictureUrl"> Picture Url </label>
+                <div>
+                    <input class="form-control" type="url" id="pictureUrl" ng-model="editAdController.selfAdObj.picture" readonly/>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label class="control-label" for="spend"> Spend </label>
+                <div>
+                    <input class="form-control" type="text" id="spend" ng-model="editAdController.selfAdObj.spend" readonly/>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label class="control-label" for="impressions">Impression </label>
+                <div>
+                    <input class="form-control" type="url" id="impressions" ng-model="editAdController.selfAdObj.impressions" placeholder="Picture Url ... " readonly/>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label class="control-label" for="created"> Created </label>
+                <div>
+                    <input class="form-control" type="url" id="created" ng-model="editAdController.selfAdObj.created" readonly/>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label class="control-label"><input type="checkbox" ng-model="editAdController.selfAdObj.isActive"> isActive </label>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label" for="description">Description</label>
+                <div>
+                    <textarea class="form-control" id="description" rows="15" ng-model="editAdController.selfAdObj.description" placeholder="Ad Description ..."></textarea>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="modal-footer">
+
+            <div class="row">
+                <div class="col-xs-4 col-xs-offset-8">
+
+                    <div class="pull-right">
+                        <button type="button" class="btn btn-default" ng-click="editAdController.close()">Close</button>
+                        <button type="submit" class="btn btn-primary">Update Ad</button>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </form>
+</div>
