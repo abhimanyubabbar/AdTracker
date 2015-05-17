@@ -3,7 +3,7 @@
 
 
     angular.module('adtracker')
-        .controller('AdController', ['$log', 'dataService', AdController]);
+        .controller('AdController', ['$log','$route', 'dataService', AdController]);
 
 
     /**
@@ -11,10 +11,12 @@
      * controller.
      *
      * @param $log
-     * @constructor
+     * @param $route
      * @param dataService
+     * @constructor
+     *
      */
-    function AdController($log, dataService){
+    function AdController($log, $route, dataService){
 
         $log.debug("Ad Landing Controller Initialized");
 
@@ -26,8 +28,18 @@
 
 
         self.deleteAd = function(id){
-            $log.debug("Function To delete the Ad Invoked" + id);
+            $log.debug("Function To delete the Ad Invoked: " + id);
+            dataService.removeAd(id)
+                .then(removeAdSuccess)
+                .catch(getDataError);
         };
+
+
+        function removeAdSuccess(){
+
+            $log.debug(" Ad(s) Successfully Removed. ");
+            $route.reload();
+        }
 
         function getDataSuccess(data){
             $log.debug("Successfully Fetched the ad(s).");
@@ -36,7 +48,7 @@
         }
 
         function getDataError(reason){
-            $log.debug(reason);
+            $log.debug(reason);     // growl functionality.
         }
 
     }

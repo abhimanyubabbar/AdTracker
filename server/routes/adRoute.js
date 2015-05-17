@@ -61,8 +61,10 @@ router.route("/")
             if(err){
                 resp.status(500).send("Unable to add new ad(s). Try later ... ");
             }
+            else{
+                resp.status(201).json(ad);
+            }
 
-            resp.status(201).json(ad);
         })
 
     });
@@ -105,8 +107,10 @@ router.route("/:id")
                     resp.status(500)
                         .send("Unable to update the resource");
                 }
+                else{
+                    resp.json(data);
+                }
 
-                resp.json(data);
             })
 
         })
@@ -117,11 +121,16 @@ router.route("/:id")
         Ad.findByIdAndRemove(req.params.id, function(err){
 
             if(err){
-                resp.send(err);
+                return resp.status(500).send(err);
+            }
+            else{
+
+                console.log("Params: " + req.params.id);
+
+                resp.status(204)
+                    .send("Successfully removed the ad(s) from the store.");
             }
 
-            resp.status(204)
-                .send("Successfully removed the ad(s) from the store.");
         })
     });
 
