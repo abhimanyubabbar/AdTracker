@@ -28,6 +28,7 @@
         function getDataSuccess(data){
             $log.debug("Successfully Fetched the ad(s).");
             self.ads = data;
+            console.log(self.ads);
         }
 
         function getDataError(reason){

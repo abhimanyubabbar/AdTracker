@@ -8,7 +8,7 @@ var AdSchema = new Schema({
 
     name: {type: String},
     campaignName: {type: String},
-    pictureUrl: {type: String},
+    picture: {type: String},
     isActive: {type: Boolean , default: false},
     impressions: {type: Number, default: 0},
     spend: {type: Number, default:0},
