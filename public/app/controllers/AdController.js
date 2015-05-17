@@ -3,7 +3,7 @@
 
 
     angular.module('adTracker')
-        .controller('AdController', ['$log','$route','$modal', 'dataService', AdController]);
+        .controller('AdController', ['$log','$route','$modal', 'dataService','growl', AdController]);
 
 
     /**
@@ -14,10 +14,10 @@
      * @param $route
      * @param $modal
      * @param dataService
-     * @constructor
+     * @param growl
      *
      */
-    function AdController($log, $route,$modal, dataService){
+    function AdController($log, $route,$modal, dataService, growl){
 
         $log.debug("Ad Landing Controller Initialized");
 
@@ -76,28 +76,32 @@
                     }
                 }
 
+                growl.success('Successfully Edited the Advertisement !');
+
             }
 
             function editAdError(reason){
                 $log.error(reason); // growl notification.
+                growl.error('Editing of the advertisement failed !');
             }
         };
 
 
         function removeAdSuccess(){
-
             $log.debug(" Ad(s) Successfully Removed. ");
             $route.reload();
         }
 
         function getDataSuccess(data){
-            $log.debug("Successfully Fetched the ad(s).");
+
             self.ads = data;
-            console.log(self.ads);
+            $log.debug("Successfully Fetched the ad(s).");
+            growl.success("Successfully Fetched the ad(s).");
         }
 
         function getDataError(reason){
             $log.debug(reason);     // growl functionality.
+            growl.error('Oops ! Action could not be completed ! ');
         }
 
     }
