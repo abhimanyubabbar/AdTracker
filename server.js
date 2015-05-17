@@ -1,6 +1,11 @@
 // MAIN DEPENDENCIES.
 var express = require('express');
 var path = require('path');
+var mongoose = require('mongoose');
+
+// DATABASE CONNECTION
+mongoose.connect('mongodb://localhost:27017/adTrackerTest');
+console.log('Connection Successful to Database');
 
 // ROUTES DEPENDENCY.
 var indexRouter = require("./server/routes/indexRoute.js");
