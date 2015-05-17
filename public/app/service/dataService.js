@@ -21,7 +21,9 @@
     function dataService($log,$http, $q){
 
         return{
-            getAllAds: getAllAds
+            getAllAds: getAllAds,
+            removeAd : removeAd,
+            editAd: editAd
         };
 
         function getAllAds(){
@@ -30,20 +32,67 @@
                 method: 'GET',
                 url: 'api/ads'
             })
-                .then(sendDataGETSuccess)
-                .catch(sendDataGETError);
+                .then(httpSuccess)
+                .catch(httpError);
         }
 
 
+        function removeAd(id){
+
+            return $http({
+                method:'DELETE',
+                url: 'api/ads/' + id
+            })
+
+                .then(removeDataSuccess)
+                .catch(removeDataError);
+        }
+
+
+        function editAd(id){
+
+            return $http({
+                method: 'PUT',
+                url: 'api/ads/'+id
+            })
+                .then(httpSuccess)
+                .catch(httpError);
+        }
+
+
+
+        function httpSuccess(response){
+            $log.debug("Received Successful HTTP Response from the server");
+            return response.data;
+        }
+
+        function httpError(response){
+            $log.error("Received error from Server.");
+            return $q.reject("Call To GET data failed with HTTP Status: " + response.status);
+        }
+
+
+
         function sendDataGETSuccess(response){
-            $log.debug("Received HTTP Response from the server");
+            $log.debug("Received Successful HTTP Response from the server");
             return response.data;
         }
 
         function sendDataGETError(response){
             $log.error("Received error from Server.");
-            return $q.defer("Call To GET data failed with HTTP Status: " + response.status);
+            return $q.reject("Call To GET data failed with HTTP Status: " + response.status);
         }
+
+
+        function removeDataSuccess (response){
+            return response.data;
+        }
+
+
+        function removeDataError(response){
+            return $q.reject("Call to DELETE ad(s) failed with HTTP Status: " + response.status);
+        }
+
 
     }
 

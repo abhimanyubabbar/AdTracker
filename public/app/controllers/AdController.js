@@ -25,6 +25,10 @@
             .catch(getDataError);
 
 
+        self.deleteAd = function(id){
+            $log.debug("Function To delete the Ad Invoked" + id);
+        };
+
         function getDataSuccess(data){
             $log.debug("Successfully Fetched the ad(s).");
             self.ads = data;
