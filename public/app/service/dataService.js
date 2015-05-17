@@ -5,7 +5,7 @@
 (function(){
 
 
-    angular.module('adtracker')
+    angular.module('adTracker')
         .factory('dataService', ['$log', '$http','$q', dataService]);
 
 
@@ -23,7 +23,8 @@
         return{
             getAllAds: getAllAds,
             removeAd : removeAd,
-            editAd: editAd
+            editAd: editAd,
+            newAd: newAd
         };
 
         function getAllAds(){
@@ -59,6 +60,17 @@
                 .catch(httpError);
         }
 
+
+        function newAd(ad){
+
+            return $http({
+                method:'POST',
+                url: 'api/ads',
+                data: ad
+            })
+                .then(httpSuccess)
+                .catch(httpError);
+        }
 
 
         function httpSuccess(response){

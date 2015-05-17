@@ -2,7 +2,7 @@
 (function(){
 
 
-    angular.module('adtracker')
+    angular.module('adTracker')
         .controller('AdController', ['$log','$route', 'dataService', AdController]);
 
 

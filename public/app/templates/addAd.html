@@ -1,0 +1,63 @@
+<div>
+    <form ng-submit="addAdController.addNewAd()" name="newAdForm" novalidate>
+
+        <div class="modal-header">
+            <button type="button" class="close" ng-click="addAdController.close()">&times;</button>
+            <h4 class="modal-title">Ad New Ad</h4>
+        </div>
+
+        <div class="modal-body">
+
+            <div class="form-group">
+                <label class="control-label" for="adName"> Ad Name</label>
+                <div>
+                    <input class="form-control" type="text" id="adName" ng-model="addAdController.newAd.name" placeholder="Advertisement name .."/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label" for="campaignName"> Campaign Name</label>
+                <div>
+                    <input class="form-control" type="text" id="campaignName" ng-model="addAdController.newAd.campaignName" placeholder="Campaign name .."/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label" for="pictureUrl"> Picture Url </label>
+                <div>
+                    <input class="form-control" type="url" id="pictureUrl" ng-model="addAdController.newAd.picture" placeholder="Picture Url ..."/>
+                </div>
+            </div>
+
+
+
+            <div class="form-group">
+                <label class="control-label"><input type="checkbox" ng-model="addAdController.newAd.isActive"> isActive </label>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label" for="description">Description</label>
+                <div>
+                    <textarea class="form-control" id="description" rows="15" ng-model="addAdController.newAd.description" placeholder="Ad Description ..."></textarea>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="modal-footer">
+
+            <div class="row">
+                <div class="col-xs-4 col-xs-offset-8">
+
+                    <div class="pull-right">
+                        <button type="button" class="btn btn-default" ng-click="addAdController.close()">Close</button>
+                        <button type="submit" class="btn btn-primary">Add Ad</button>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </form>
+</div>
