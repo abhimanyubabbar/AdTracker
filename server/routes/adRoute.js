@@ -41,7 +41,42 @@ router.route("/")
 
             resp.json(ads);
         });
+    })
+    .post(function(req, resp){
+
+        var ad  = new Ad();
+        var reqBody = req.body;
+
+        ad['name'] = reqBody['name'];
+        ad['campaignName'] = reqBody['campaignName'];
+        ad['picture'] = reqBody['picture'];
+        ad['isActive'] = reqBody['isActive'];
+        ad['impressions'] = parseInt(getRandomValue(0,10000));
+        ad['spend'] = getRandomValue(0, 1000).toFixed(2);
+        ad['description'] = reqBody['description'];
+        ad['created'] = Date.now();
+
+        ad.save(function(err){
+
+            if(err){
+                resp.status(500).send("Unable to add new ad(s). Try later ... ");
+            }
+
+            resp.status(201).json(ad);
+        })
+
     });
+
+
+
+function getRandomValue(min, max){
+
+    if(min >= max){
+        return min;
+    }
+
+    return (Math.random()*(max - min) + min);
+}
 
 
 function addTestData(){
@@ -60,7 +95,6 @@ function addTestData(){
         ad['impressions'] = currentObj['impressions'];
         ad['spend'] = currentObj['spend'];
         ad['description'] = currentObj['description'];
-        ad['created'] = new Date(currentObj['created']);
 
         ad.save(function(err){
             if(err){

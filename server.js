@@ -2,6 +2,7 @@
 var express = require('express');
 var path = require('path');
 var mongoose = require('mongoose');
+var bodyParser = require('body-parser');
 
 // DATABASE CONNECTION
 mongoose.connect('mongodb://localhost:27017/adTrackerTest');
@@ -15,6 +16,8 @@ var adRouter = require('./server/routes/adRoute.js');
 var app = express();
 
 // MIDDLEWARE.
+app.use(bodyParser.json({}));
+app.use(bodyParser.urlencoded({ extended: false}));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/api/ads', adRouter);
