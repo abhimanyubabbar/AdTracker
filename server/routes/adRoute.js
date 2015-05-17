@@ -69,6 +69,65 @@ router.route("/")
 
 
 
+// PARAMETRIZED ROUTE
+
+router.route("/:id")
+
+    .get(function(req, resp){
+
+        Ad.findById(req.params.id, function(err, data){
+
+            if(err){
+                resp.status(404)
+                    .send("Unable to locate resource");
+            }
+            else{
+                resp.json(data);
+            }
+        })
+    })
+
+    .put(function(req, resp){
+
+        Ad.findById(req.params.id, function(err, data){
+
+            if(err){
+                resp.status(404)
+                    .send("Unable to Locate Resource to Update");
+            }
+
+            data.description = req.body.description;
+            data.isActive = req.body.isActive;
+
+            data.save(function(err){
+
+                if(err){
+                    resp.status(500)
+                        .send("Unable to update the resource");
+                }
+
+                resp.json(data);
+            })
+
+        })
+    })
+
+    .delete(function(req, resp) {
+
+        Ad.findByIdAndRemove(req.params.id, function(err){
+
+            if(err){
+                resp.send(err);
+            }
+
+            resp.status(204)
+                .send("Successfully removed the ad(s) from the store.");
+        })
+    });
+
+
+// HELPER FUNCTIONS.
+
 function getRandomValue(min, max){
 
     if(min >= max){
