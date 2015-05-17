@@ -1,28 +1,18 @@
-// Main Express Application.
+// MAIN DEPENDENCIES.
 var express = require('express');
 var path = require('path');
-var fs = require('fs');
-var adDataFile = './server/data/ads.json';
 
+// ROUTES DEPENDENCY.
+var indexRouter = require("./server/routes/indexRoute.js");
+var adRouter = require('./server/routes/adRoute.js');
+
+// MAIN APPLICATION.
 var app = express();
-
 
 // MIDDLEWARE.
 app.use(express.static(path.join(__dirname, 'public')));
-
-
-app.get("/", function(req, resp){
-    resp.render('index');
-});
-
-app.get("/api/ads", function(req, resp){
-   resp.json(getAdData());
-});
-
-function getAdData(){
-    var data = fs.readFileSync(adDataFile);
-    return JSON.parse(data);
-}
+app.use('/', indexRouter);
+app.use('/api/ads', adRouter);
 
 
 // PORT DEFINITION AND APP LISTENING.
