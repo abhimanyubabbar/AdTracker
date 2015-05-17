@@ -28,6 +28,47 @@
             .catch(getDataError);
 
 
+        self.addNewAd = function(){
+
+            var modalInstance = $modal.open({
+
+                templateUrl: 'app/templates/addAd.html',
+                controller: 'AddAdController',
+                controllerAs: 'addAdController',
+                backdrop: 'static'
+            });
+
+            modalInstance.result.then(function(info){
+                if(info){
+
+                    $log.debug("Adding a new ad");
+                    $log.debug("New Ad Info" + info);
+
+
+                    dataService.newAd(info)
+                        .then(newAdSuccess)
+                        .catch(newAdFailure);
+
+                }
+            });
+
+
+            function newAdSuccess(data){
+
+                $log.info(data);
+                self.ads.push(data);
+                growl.success('Added a new Advertisement !')
+            }
+
+
+            function newAdFailure(){
+                $log.error(" Unable to add new ad");
+                growl.warning('Unable to add New Advertisement ! ');
+            }
+
+        };
+
+
         self.deleteAd = function(id){
             $log.debug("Function To delete the Ad Invoked: " + id);
             dataService.removeAd(id)
@@ -96,7 +137,7 @@
 
             self.ads = data;
             $log.debug("Successfully Fetched the ad(s).");
-            growl.success("Successfully Fetched the ad(s).");
+            growl.success("Successfully loaded advertisement(s).");
         }
 
         function getDataError(reason){

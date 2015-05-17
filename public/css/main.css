@@ -1,7 +1,7 @@
 body {
     padding-top: 60px;
     font-family: 'Dosis', sans-serif;
-    background: lightgrey;
+    /*background: lightgrey;*/
 }
 
 .specialFont{
@@ -9,7 +9,7 @@ body {
 }
 
 .navbar-default > .container-fluid{
-    background-color: lightcyan;
+    background-color: yellow;
 }
 
 .nav > li > a:hover{
