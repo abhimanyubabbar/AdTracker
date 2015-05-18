@@ -1,7 +1,9 @@
 body {
-    padding-top: 60px;
+    margin-top: 60px;
+    /*padding-top: 60px;*/
     font-family: 'Dosis', sans-serif;
-    /*background: lightgrey;*/
+    background:lightsteelblue;
+
 }
 
 .specialFont{
@@ -9,7 +11,7 @@ body {
 }
 
 .navbar-default > .container-fluid{
-    background-color: yellow;
+    background-color: white;
 }
 
 .nav > li > a:hover{
@@ -22,4 +24,44 @@ body {
 }
 .inActiveBorder {
     border: red 2px solid;
+}
+
+.mtl{
+    margin-top: 20px;
+}
+
+.txt-right{
+    text-align: right;
+}
+
+.mbl{
+    margin-bottom: 20px;
+}
+
+.mbl{
+    margin-bottom: 20px;
+}
+
+.pdtl{
+    padding-top: 10px;
+}
+
+.img-wrapper{
+
+}
+
+.img-wrapper .glyphicon-ok{
+    position: absolute;
+    top: 170px;
+    left: 220px;
+    color: green;
+    font-size: 40px;
+}
+
+.img-wrapper .glyphicon-remove{
+    position: absolute;
+    top: 170px;
+    left: 220px;
+    color: coral;
+    font-size: 40px;
 }
