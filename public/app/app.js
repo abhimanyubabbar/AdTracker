@@ -4,7 +4,7 @@
 
 (function(){
 
-    var app = angular.module('adTracker',['ngRoute','ui.bootstrap','angular-growl']);
+    var app = angular.module('adTracker',['ngRoute','ui.bootstrap','angular-growl',"oitozero.ngSweetAlert"]);
 
     app.config(['$logProvider', '$routeProvider','growlProvider', function($logProvider, $routeProvider, growlProvider){
 

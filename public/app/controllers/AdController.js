@@ -1,9 +1,8 @@
-
-(function(){
+(function () {
 
 
     angular.module('adTracker')
-        .controller('AdController', ['$log','$route','$modal', 'dataService','growl', AdController]);
+        .controller('AdController', ['$log', '$route', '$modal', 'dataService', 'growl', 'SweetAlert', AdController]);
 
 
     /**
@@ -17,7 +16,7 @@
      * @param growl
      *
      */
-    function AdController($log, $route,$modal, dataService, growl){
+    function AdController($log, $route, $modal, dataService, growl, SweetAlert) {
 
         $log.debug("Ad Landing Controller Initialized");
 
@@ -28,7 +27,7 @@
             .catch(getDataError);
 
 
-        self.addNewAd = function(){
+        self.addNewAd = function () {
 
             var modalInstance = $modal.open({
 
@@ -38,8 +37,8 @@
                 backdrop: 'static'
             });
 
-            modalInstance.result.then(function(info){
-                if(info){
+            modalInstance.result.then(function (info) {
+                if (info) {
 
                     $log.debug("Adding a new ad");
                     $log.debug("New Ad Info" + info);
@@ -53,7 +52,7 @@
             });
 
 
-            function newAdSuccess(data){
+            function newAdSuccess(data) {
 
                 $log.info(data);
                 self.ads.push(data);
@@ -61,7 +60,7 @@
             }
 
 
-            function newAdFailure(){
+            function newAdFailure() {
                 $log.error(" Unable to add new ad");
                 growl.warning('Unable to add New Advertisement ! ');
             }
@@ -69,16 +68,32 @@
         };
 
 
-        self.deleteAd = function(id){
+        self.deleteAd = function (id) {
+
             $log.debug("Function To delete the Ad Invoked: " + id);
-            dataService.removeAd(id)
-                .then(removeAdSuccess)
-                .catch(getDataError);
+
+            SweetAlert.swal({
+                    title: "Are you sure?",
+                    text: "The Advertisement will be removed",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55", confirmButtonText: "Yes, delete it!",
+                    cancelButtonText: "Cancel",
+                    closeOnConfirm: true,
+                    closeOnCancel: true
+                },
+                function (isConfirm) {
+
+                    if (isConfirm) {
+                        dataService.removeAd(id)
+                            .then(removeAdSuccess)
+                            .catch(getDataError)
+                    }
+                });
         };
 
 
-
-        self.updateAd = function(ad){
+        self.updateAd = function (ad) {
 
             var modalInstance = $modal.open({
 
@@ -87,14 +102,14 @@
                 controllerAs: 'editAdController',
                 backdrop: 'static',
                 resolve: {
-                    ad: function(){
+                    ad: function () {
                         return ad;
                     }
                 }
             });
 
-            modalInstance.result.then(function(info){
-                if(info){
+            modalInstance.result.then(function (info) {
+                if (info) {
 
                     $log.debug(" Sending the request to update the ad.");
                     dataService.editAd(ad._id, info)
@@ -104,14 +119,14 @@
             });
 
 
-            function editAdSuccess (data){
+            function editAdSuccess(data) {
 
                 $log.debug(data);
 
                 var selfAds = self.ads;
-                for(var i= 0, len= selfAds.length; i< len; i++){
+                for (var i = 0, len = selfAds.length; i < len; i++) {
 
-                    if(selfAds[i]['_id'] === data['_id']){
+                    if (selfAds[i]['_id'] === data['_id']) {
                         selfAds.splice(i, 1, data);
                         break;
                     }
@@ -121,26 +136,26 @@
 
             }
 
-            function editAdError(reason){
+            function editAdError(reason) {
                 $log.error(reason); // growl notification.
                 growl.error('Editing of the advertisement failed !');
             }
         };
 
 
-        function removeAdSuccess(){
+        function removeAdSuccess() {
             $log.debug(" Ad(s) Successfully Removed. ");
             $route.reload();
         }
 
-        function getDataSuccess(data){
+        function getDataSuccess(data) {
 
             self.ads = data;
             $log.debug("Successfully Fetched the ad(s).");
-            growl.success("Successfully loaded advertisement(s).");
+            growl.success(" Refreshed Advertisement(s) from Server.");
         }
 
-        function getDataError(reason){
+        function getDataError(reason) {
             $log.debug(reason);     // growl functionality.
             growl.error('Oops ! Action could not be completed ! ');
         }
