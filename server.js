@@ -5,7 +5,7 @@ var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 
 // DATABASE CONNECTION
-mongoose.connect('mongodb://localhost:27017/adTrackerTest');
+mongoose.connect('mongodb://localhost:27017/adTracker');
 console.log('Connection Successful to Database');
 
 // ROUTES DEPENDENCY.
