@@ -9,6 +9,6 @@ advertisement.
 1. Install Nodejs & Mongodb.
 2. Perform *npm install* to fetch the dependencies.
 3. Install **gulp** globally using *npm install gulp -g*
-4. Type *gulp* in root folder of the application where *server.js* file is located.
+4. Type *gulp* in root folder of the application where *gulpfile.js* file is located.
 
 
