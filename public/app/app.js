@@ -8,7 +8,7 @@
 
     app.config(['$logProvider', '$routeProvider','growlProvider', function($logProvider, $routeProvider, growlProvider){
 
-        $logProvider.debugEnabled(true);
+        $logProvider.debugEnabled(false);
         growlProvider.globalTimeToLive(4000);
 
         $routeProvider
